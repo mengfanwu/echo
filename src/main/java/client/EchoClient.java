@@ -1,6 +1,7 @@
 package client;
 
 import handler.EchoClientHandler;
+import handler.EchoClientHandler2;
 import handler.EchoClientOutHandler;
 import handler.EchoClientOutHandler2;
 import io.netty.bootstrap.Bootstrap;
@@ -34,8 +35,8 @@ public class EchoClient {
                     .remoteAddress(new InetSocketAddress(host,port))
                     .handler(new ChannelInitializer<SocketChannel>() {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline().addLast(new EchoClientOutHandler2())
-                                    .addLast(new EchoClientHandler()).addLast(new EchoClientOutHandler());
+                            socketChannel.pipeline().addLast(new EchoClientHandler2())
+                                    .addLast(new EchoClientOutHandler2()).addLast(new EchoClientOutHandler()).addLast(new EchoClientHandler());
                         }
                     });
             ChannelFuture future = b.connect().sync();
